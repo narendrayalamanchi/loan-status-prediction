@@ -1,0 +1,62 @@
+<html>
+    <style>
+        h1,p{
+            text-align: center;
+        }
+        table, th, td {
+            border:1px solid black;
+        }
+    </style>
+    <body>
+        <h1> History of user : {{request.session.name}}</h1>
+        <p>To go back to dashboard :  <a href="/dashboard">  Click here</a></p>
+
+        {% if history|length == 0 %}
+            <p style="font-size: 18px;font-weight:bold;">No History Data Found.</p>
+        {% else %}
+            <table>
+                <tr>
+                    <th>Loan Amount </th>
+                    <th> Term </th>
+                    <th> Credit Score  </th>
+                    <th> Annual Income </th>
+                    <th> Years in current job </th>
+                    <th> Home Ownership </th>
+                    <th> Purpose </th>
+                    <th> Monthly Debt</th>
+                    <th> Years of Credit History </th>
+                    <th> No of Open Accounts </th>
+                    <th> Credit Problems </th>
+                    <th>Current Credit Balance</th>
+                    <th> Max Open Credit </th>
+                    <th> Bankruptcies </th>
+                    <th>Tax Liens </th>
+                    <th> Predicted Loan Status</th>
+                </tr>
+
+                
+                {% for his in history %}
+                    <tr>
+                        <td> {{his.loan_amount}}</td>
+                        <td> {{his.term}}</td>
+                        <td> {{his.credit_score}}</td>
+                        <td> {{his.annual_income}}</td>
+                        <td> {{his.years_in_current_job}}</td>
+                        <td> {{his.home_ownership}}</td>
+                        <td> {{his.purpose}}</td>
+                        <td> {{his.monthly_debt}}</td>
+                        <td> {{his.years_of_credit_history}}</td>
+                        <td> {{his.number_of_open_accounts}}</td>
+                        <td> {{his.number_of_credit_problems}}</td>
+                        <td> {{his.current_credit_balance}}</td>
+                        <td> {{his.maximum_open_credit}}</td>
+                        <td> {{his.bankruptcies}}</td>
+                        <td> {{his.tax_liens}}</td>
+                        <td> {{his.predictvalue}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+
+    </body>
+</html>

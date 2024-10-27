@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="welcome_content" style="text-align: center;">
+    <h2>Hi, {{request.session.name}}.<br>
+    Welcome to your dashboard.</h2>
+
+    <p>To logout :  <a href="/logout">  Click here</a></p>
+    <br>
+    <p>To check previous history :  <a href="/history">  Click here</a></p>
+
+    <br><br><br>
+
+    <form action="/checkloanstatus" method="post">
+        {% csrf_token %}
+        <div class="row">
+            
+            <label>Current Loan Amount: </label>   
+            <input type="number"  class="loan_amount" name="loan_amount" placeholder="Current Loan Amount" />
+            <label>Term: </label>   
+            <select name="term" id="term-select">
+                <option value="">--Please choose an option--</option>
+                <option value="0">Long Term</option>
+                <option value="1">Short Term</option>
+            </select>
+            <label>Credit Score: </label>   
+            <input type="number"  class="credit_score" name="credit_score" placeholder="Credit Score" />
+        </div>
+        <br>
+
+        <div class="row">
+            <label>Annual Income: </label>   
+            <input type="number"  class="annual_income" name="annual_income" placeholder="Annual Income" />
+            <label>Years in current job: </label>   
+            <input type="number"  class="years_in_current_job" name="years_in_current_job" placeholder="Years in current job" />
+
+            <label>Home Ownership: </label>   
+            <select name="home_ownership" id="homeownership-select">
+                <option value="">--Please choose an option--</option>
+                <option value="0">HaveMortgage</option>
+                <option value="1">Home Mortgage</option>
+                <option value="2">Own Home</option>
+                <option value="3">Rent</option>
+            </select>
+        </div>
+        <br>
+        <div class="row">
+            <label>Purpose: </label>   
+            <select name="purpose" id="purpose-select">
+                <option value="">--Please choose an option--</option>
+                <option value="0">Business Loan</option>
+                <option value="1">Buy House</option>
+                <option value="2">Buy a Car</option>
+                <option value="3">Debt Consolidation</option>
+                <option value="4">Educational Expenses</option>
+                <option value="5">Home Improvements</option>
+                <option value="6">Medical Bills</option>
+                <option value="7">Other</option>
+                <option value="8">Take a Trip</option>
+                <option value="9">major_purchase</option>
+                <option value="10">moving</option>
+                <option value="11">renewable_energy</option>
+                <option value="12">small_business</option>
+                <option value="13">vacation</option>
+                <option value="14">wedding</option>
+            </select>
+            <label>Monthly Debt: </label>   
+            <input type="number" class="monthly_debt" name="monthly_debt" placeholder="Monthly Debt" />
+            <label>Years of Credit History: </label>   
+            <input type="number" class="years_of_credit_history" name="years_of_credit_history" placeholder="Years of Credit History" />
+        </div>
+        <br>
+        <div class="row">
+            <label>Number of Open Accounts: </label>   
+            <input type="number" class="number_of_open_accounts" name="number_of_open_accounts" placeholder="Number of Open Accounts" />
+            <label>Number of Credit Problems: </label>   
+            <input type="number" class="number_of_credit_problems" name="number_of_credit_problems" placeholder="Number of Credit Problems" />
+            <label>Current Credit Balance: </label>   
+            <input type="number" class="current_credit_balance" name="current_credit_balance" placeholder="Current Credit Balance" />
+        </div>
+        <br>
+        <div class="row">
+            <label>Maximum Open Credit: </label>   
+            <input type="number" class="maximum_open_credit" name="maximum_open_credit" placeholder="Maximum Open Credit" />
+            <label>Bankruptcies: </label>   
+            <input type="number" class="bankruptcies" name="bankruptcies" placeholder="Bankruptcies" />
+            <label>Tax Liens: </label>   
+            <input type="number" class="tax_liens" name="tax_liens" placeholder="Tax Liens" />
+        </div>
+        <br>
+
+        <input type="submit" value="Check Loan Status">
+    </form>
+    {% if predictedvalue != None %}
+        <h4 style="font:bold;"> The predicted value of Loan Status : {{predictedvalue}} </h4>
+        <p>0:Charged Off ,1:Fully Paid</p>
+
+        <h2>To Check Report</h2>
+        <p>Training Data Report :  <a href="/trainreport" target=”_blank”>  Click here</a></p>
+        <p>Test Data Report :  <a href="/testreport" target=”_blank”>  Click here</a></p>
+        <p>Train and test Data Comparison Report :  <a href="/traintestcomparisonreport" target=”_blank”>  Click here</a></p>
+    {% endif %}
+
+
+
+
+</div>
+
+{% endblock %}

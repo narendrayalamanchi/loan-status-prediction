@@ -1,0 +1,9 @@
+Django==3.2.6
+passlib
+bcrypt
+pandas
+matplotlib
+seaborn
+scikit-learn
+scipy
+sweetviz
